@@ -1,0 +1,37 @@
+web:
+  restart: always
+  build: docker
+  dockerfile: Php5.6_Apache2
+  ports:
+   - "9999:80"
+  links:
+   - mysql
+  hostname: dockervm
+  volumes:
+   - ./:/app
+   - ./docker/vhost.apache.conf:/etc/apache2/sites-enabled/000-default.conf
+   - ./docker/php.development.ini:/usr/local/etc/php/php.ini
+  working_dir: /app
+  environment:
+   - VIRTUAL_HOST=project.dev
+
+mysql:
+  restart: always
+  image: mysql:5.5
+  volumes:
+   - ./docker:/docker
+  # ports:
+  #  - "13306:3306"
+  environment:
+    MYSQL_DATABASE: database_name_here
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_USER: dev
+    MYSQL_PASSWORD: dev
+    # MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+# proxy:
+#   image: jwilder/nginx-proxy
+#   volumes:
+#     - /var/run/docker.sock:/tmp/docker.sock
+#   ports:
+#     - "80:80"

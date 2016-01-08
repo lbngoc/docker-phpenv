@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"www/node_modules",
+			],
+			"path": "."
+		}
+	],
+	"settings":
+    {
+        "tab_size": 4
+    },
+}
