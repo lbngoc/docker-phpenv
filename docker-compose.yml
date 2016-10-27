@@ -9,19 +9,20 @@ web:
   hostname: dockervm
   volumes:
    - ./:/app
+#   - ~/Download/Wordpress:/app/src/wp
    - ./docker/vhost.apache.conf:/etc/apache2/sites-enabled/000-default.conf
    - ./docker/php.development.ini:/usr/local/etc/php/php.ini
   working_dir: /app
   environment:
-   - VIRTUAL_HOST=project.dev
+   - VIRTUAL_HOST=project_name.dev
 
 mysql:
   restart: always
   image: mysql:5.5
   volumes:
    - ./docker:/docker
-  # ports:
-  #  - "13306:3306"
+  ports:
+   - "19999:3306"
   environment:
     MYSQL_DATABASE: database_name_here
     MYSQL_ROOT_PASSWORD: root

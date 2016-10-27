@@ -1,0 +1,17 @@
+{
+	"node": true,
+	"browser": true,
+	"devel": true,
+	"esnext": true,
+	"bitwise": true,
+	"regexp": true,
+	"undef": true,
+	"unused": true,
+	"strict": false,
+	"trailing": true,
+	"globals": {
+		"angular": true,
+		"chrome": true,
+		"localStorage": true
+	}
+}

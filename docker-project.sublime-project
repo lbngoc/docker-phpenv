@@ -1,16 +1,57 @@
 {
-	"folders":
-	[
-		{
-			"folder_exclude_patterns":
-			[
-				"www/node_modules",
-			],
-			"path": "."
-		}
-	],
-	"settings":
+  "folders": [
     {
-        "tab_size": 4
+      "path": "docker",
+      "name": "Docker",
+      "file_exclude_patterns": ["*.phar"]
     },
+    {
+      "path": ".",
+      "name": "Common",
+      "file_exclude_patterns": ["*~"],
+      "folder_exclude_patterns": [
+        "src",
+        "docker",
+        "docs",
+        "public_html"
+      ]
+    },
+    {
+      "path": "docs",
+      "name": "Documentation",
+      "file_exclude_patterns": ["*.zip"]
+    },
+    {
+      "path": "src",
+      "name": "Source",
+      "folder_exclude_patterns": [
+        "src/node_modules",
+        "src/vendor"
+      ],
+      "follow_symlinks": true
+    }
+  ],
+  "settings": {
+    "codeformatter_php_options": {
+      "format_on_save": true, // Format on save
+    },
+    "codeformatter_js_options": {
+      "format_on_save": true, // Format on save
+    },
+    "codeformatter_css_options": {
+      "format_on_save": true, // Format on save
+    },
+    "rulers":
+    [
+      80
+    ],
+    "wordwrap": true
+    // "binary_file_patterns": [] // exclude from Go to Anything
+  },
+  "build_systems": [
+    {
+      "name": "List",
+      "shell_cmd": "ls -l"
+    }
+  ]
 }

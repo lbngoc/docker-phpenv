@@ -1,18 +1,24 @@
 #!/bin/bash
 
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.common.sh"
+
 BACKUP_DIR=docker/backup
 FILENAME=$MYSQL_DATABASE.$(date +%Y-%m-%d-%H.%M.%S)
 
-echo "=== Exported SQL Files ==="
-ls /$BACKUP_DIR | grep ".sql.gz"
-echo "=========================="
-printf ">> Enter file name: " && read FILENAME
+output "Available backup:" -i
+output "---" -i
+ls /$BACKUP_DIR | grep -E "\.sql(\.gz)?$"
+# output "==========================" -i
+FILENAME=$(input "Enter file name: ")
 
 if [ ! -f "/$BACKUP_DIR/$FILENAME" ]; then
-    echo ">> File does not exits."
-    exit 0
+	output "File does not exits." -e &&	exit 0
 fi
 
-gunzip < /$BACKUP_DIR/$FILENAME | mysql -hmysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE
+if [ $FILENAME =~  ^.*\.sql\.gz$ ] then
+	gunzip < "/$BACKUP_DIR/$FILENAME" | mysql -hmysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE
+else
+	mysql -hmysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < "/$BACKUP_DIR/$FILENAME"
+fi
 
-echo ">> File $BACKUP_DIR/$FILENAME.sql.gz is imported."
+output "[Success] File "$BACKUP_DIR/$FILENAME" is imported." -s

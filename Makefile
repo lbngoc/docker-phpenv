@@ -1,18 +1,22 @@
-ARGS = $(filter-out $@,$(MAKECMDGOALS))
+# ARGS = $(filter-out $@,$(MAKECMDGOALS))
 
 all:
-	@echo "Usage: "
-	@echo "  make dev                             : Start server in foreground."
-	@echo "  make start                           : Start server in background."
-	@echo "  make cleanup                         : Stop all running container and rebuild image."
-	@echo "  make ssh                             : Connect to virtual docker container."
-	@echo "  make mysql-backup                    : Backup current database to compressed file."
-	@echo "  make mysql-restore [filename.sql.bz] : Restore compressed file to current database."
+	@echo "Usage: make <command>"
+	@echo "Commands:"
+	@echo "  serve                    : Start server in foreground."
+	@echo "  start                    : Start server in background."
+	@echo "  stop                     : Stop all running server."
+	@echo "  rebuild                  : Stop all running container and rebuild docker image file."
+	@echo "  ssh                      : Connect to virtual docker container."
+	@echo "  mysql-backup             : Backup current database to file."
+	@echo "  mysql-restore <filename> : Restore exported database file."
+	@echo "  init-wordpress           : Init wordpress skeleton into your \"src\" folder."
+	@echo "\nFor more details, visit [http://ngoclb.com/docker-phpenv]"
 
 ssh:
 	docker-compose run --rm web bash
 
-dev:
+serve:
 	docker-compose up
 
 start:
@@ -22,7 +26,7 @@ start:
 stop:
 	docker-compose stop
 
-cleanup:
+rebuild:
 	docker-compose stop mysql web
 	docker-compose build
 
@@ -32,3 +36,5 @@ mysql-backup:
 mysql-restore:
 	docker-compose run --rm mysql bash /docker/bin/mysql-restore.sh
 
+init-wordpress:
+	bash docker/bin/init-wordpress-skeleton.sh
