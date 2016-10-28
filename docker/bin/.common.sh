@@ -23,13 +23,13 @@ output() {
 		-i)
 			OUTPUT="$cyan$1$reset";;
 		*)
-			OUTPUT="$purple$1$reset";;
+			OUTPUT="$reset$1";;
 	esac
 	echo -e $OUTPUT
 }
 
 input() {
-	read -p "$purple> $*$reset" INPUT_VALUE
+	read -p "$cyan> $*$reset" INPUT_VALUE
 	echo $INPUT_VALUE
 }
 
@@ -48,7 +48,10 @@ if [ -z "`which $READLINK`" ]; then
     exit 1
 fi
 
+CURRENT_DIR=$(pwd)
 SCRIPT_DIR=$(dirname "$($READLINK -f "$0")")
 ROOT_DIR=$($READLINK -f "$SCRIPT_DIR/../../")
-SOURCE_DIR=$($READLINK -f "$ROOT_DIR/src")
-BACKUP_DIR=$($READLINK -f "$SCRIPT_DIR/../backup")
+SOURCE_DIR_NAME='src'
+BACKUP_DIR_NAME='backup'
+SOURCE_DIR=$($READLINK -f "$CURRENT_DIR/$SOURCE_DIR_NAME")
+BACKUP_DIR=$($READLINK -f "$SCRIPT_DIR/../$BACKUP_DIR_NAME")

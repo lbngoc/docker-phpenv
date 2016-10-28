@@ -2,6 +2,7 @@
 
 source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.common.sh"
 
+output "WARNING: This command will remove all files and folders at here and move all files in \"src\" to here !!!\nIt will be better if you can do it manually." -w
 CONTINUE=$(input "Are you sure to remove docker files [y/n]? ")
 if [[ ! $CONTINUE =~ ^[Yy]$ ]]
 then
