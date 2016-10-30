@@ -1,16 +1,6 @@
 {
   "folders": [
     {
-      "path": "docs",
-      "name": "Documentation",
-      "file_exclude_patterns": ["*.zip"]
-    },
-    {
-      "path": "docker",
-      "name": "Docker",
-      "file_exclude_patterns": ["*.phar"]
-    },
-    {
       "path": ".",
       "name": "Common",
       "file_exclude_patterns": ["*~"],
@@ -20,6 +10,16 @@
         "docs",
         "public_html"
       ]
+    },
+    {
+      "path": "docker",
+      "name": "Docker",
+      "file_exclude_patterns": ["*.phar"]
+    },
+    {
+      "path": "docs",
+      "name": "Documentation",
+      "file_exclude_patterns": ["*.zip"]
     },
     {
       "path": "src",
@@ -41,12 +41,11 @@
     "codeformatter_css_options": {
       "format_on_save": true, // Format on save
     },
-    "rulers":
-    [
+    "rulers": [
       80
     ],
     "wordwrap": true
-    // "binary_file_patterns": [] // exclude from Go to Anything
+      // "binary_file_patterns": [] // exclude from Go to Anything
   },
   "build_systems": [
     {
