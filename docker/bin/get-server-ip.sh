@@ -2,10 +2,10 @@
 
 source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.common.sh"
 
-output s "Server is running..."
+output "Server is running..." -s
 
 HTTP=$(docker-compose port web 80)
 MYSQL=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker-compose ps | awk '/mysql/ {print $1}'))
 
-output i "  - website : http://$HTTP"
-output i "  - mysql   : tcp://$MYSQL:3306"
+output "  - website : http://$HTTP"
+output "  - mysql   : tcp://$MYSQL:3306"
