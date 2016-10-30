@@ -1,6 +1,11 @@
 {
   "folders": [
     {
+      "path": "docs",
+      "name": "Documentation",
+      "file_exclude_patterns": ["*.zip"]
+    },
+    {
       "path": "docker",
       "name": "Docker",
       "file_exclude_patterns": ["*.phar"]
@@ -15,11 +20,6 @@
         "docs",
         "public_html"
       ]
-    },
-    {
-      "path": "docs",
-      "name": "Documentation",
-      "file_exclude_patterns": ["*.zip"]
     },
     {
       "path": "src",
