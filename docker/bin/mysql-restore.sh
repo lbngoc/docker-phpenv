@@ -11,12 +11,12 @@ ls /$BACKUP_DIR | grep -E "\.sql(\.gz)?$"
 # output "==========================" -i
 FILENAME=$(input "Enter file name: ")
 
-if [ ! -f "/$BACKUP_DIR/$FILENAME" ]; then
+if [[ ! -f "/$BACKUP_DIR/$FILENAME" ]]; then
 	output "File does not exits." -e &&	exit 0
 fi
 
 output "Restoring your database..."
-if [ $FILENAME =~  ^.*\.sql\.gz$ ] then
+if [[ $FILENAME =~  ^.*\.sql\.gz$ ]]; then
 	gunzip < "/$BACKUP_DIR/$FILENAME" | mysql -hmysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE
 else
 	mysql -hmysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < "/$BACKUP_DIR/$FILENAME"
