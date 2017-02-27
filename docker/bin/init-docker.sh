@@ -44,9 +44,10 @@ while [[ ! $PROJECT_NAME =~ ^[A-Za-z0-9-]+$ ]]; do
 	PROJECT_NAME=$(input "Enter project name [a-zA-Z0-9-]: ")
 done
 
-while [[ ! $PROJECT_PORT =~ ^[1-9][0-9]{3,4}$ ]]; do
-	PROJECT_PORT=$(input "Enter docker application port [1000~99999]: ")
-done
+# Disable project port, use VIRTUAL_HOST + nginx-proxy instead of this
+# while [[ ! $PROJECT_PORT =~ ^[1-9][0-9]{3,4}$ ]]; do
+# 	PROJECT_PORT=$(input "Enter docker application port [1000~99999]: ")
+# done
 
 while [[ ! $PROJECT_DBNAME =~ ^[A-Za-z0-9-]+$ ]]; do
 	PROJECT_DBNAME=$(input "Enter database name [a-zA-Z0-9-]: ")
@@ -57,7 +58,7 @@ mv docker-project.sublime-project $PROJECT_NAME.sublime-project
 rm docker/bin/init-docker.sh
 # cp docker-compose.yml docker-compose.yml.bak
 # Change docker settings
-sed -i "s/9999/$PROJECT_PORT/g" docker-compose.yml
+# sed -i "s/9999/$PROJECT_PORT/g" docker-compose.yml
 sed -i "s/project_name/$PROJECT_NAME/g" docker-compose.yml
 sed -i "s/database_name_here/$PROJECT_DBNAME/g" docker-compose.yml
 

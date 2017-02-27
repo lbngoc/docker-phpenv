@@ -41,5 +41,6 @@ else
 	# Remove git
 	rm -rf $SOURCE_DIR/.git
 
+	output "Run this command to complete setup \"sudo chown -R www-data src/wp-content\"";
 	output "[Success]" -s
 fi

@@ -21,17 +21,18 @@ serve:
 
 start:
 	docker-compose up -d
-	bash docker/bin/get-server-ip.sh
+	@echo "===> Docker container is running in background..."
+	@docker-compose run --rm web env | grep -E '^VIRTUAL_HOST=|^WEB_PORT=|^MYSQL_PORT='
 
 stop:
 	docker-compose stop
 
 rebuild:
-	docker-compose stop mysql web
+	docker-compose stop web
 	docker-compose build
 
 mysql-backup:
-	docker-compose run --rm mysql bash /docker/bin/mysql-backup.sh
+	docker-compose run --rm --user="1000:1000" mysql bash /docker/bin/mysql-backup.sh
 
 mysql-restore:
 	docker-compose run --rm mysql bash /docker/bin/mysql-restore.sh
